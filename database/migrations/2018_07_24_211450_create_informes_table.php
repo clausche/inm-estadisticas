@@ -15,7 +15,7 @@ class CreateInformesTable extends Migration
     {
         Schema::create('informes', function (Blueprint $table) {
             $table->increments('id');
-            $table->interger('user_id');
+            $table->integer('user_id');
             $table->string('actor');
             $table->string('abogado');
             $table->string('demandada');

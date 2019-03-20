@@ -75,4 +75,25 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('users/{user}/edit','UserController@edit')->name('users.edit')
     ->middleware('permission:users.edit');
+
+    Route::post('ingresos/store','IngresosController@store')->name('ingresos.store')
+    ->middleware('permission:ingresos.create');
+
+    Route::get('ingresos','IngresosController@index')->name('ingresos.index')
+    ->middleware('permission:ingresos.index');
+
+    Route::get('ingresos/create','IngresosController@create')->name('ingresos.create')
+    ->middleware('permission:ingresos.create');
+
+    Route::put('ingresos/{ingreso}','IngresosController@update')->name('ingresos.update')
+    ->middleware('permission:ingresos.edit');
+
+    Route::get('ingresos/{ingreso}','IngresosController@show')->name('ingresos.show')
+    ->middleware('permission:ingresos.show');
+
+    Route::delete('ingresos/{ingreso}','IngresosController@destroy')->name('ingresos.destroy')
+    ->middleware('permission:ingresos.destroy');
+
+    Route::get('ingresos/{ingreso}/edit','IngresosController@edit')->name('ingresos.edit')
+    ->middleware('permission:ingresos.edit');
 });
