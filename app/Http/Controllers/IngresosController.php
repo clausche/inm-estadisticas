@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Ingresos;
 use App\Paises;
+use Illuminate\Support\Facades\Storage;
 
 class IngresosController extends Controller
 {
@@ -24,7 +25,7 @@ class IngresosController extends Controller
      */
     public function index()
     {
-        $ingresos=Ingresos::all();
+        $ingresos=Ingresos::where('fingreso',->get();
         return view('ingresos.index',compact('ingresos'));
     }
 
@@ -74,6 +75,22 @@ class IngresosController extends Controller
         'quienesperamx'=>$request->input('quienesperamx'),
         'proximacita'=>$request->input('proximacita'),
         ]);
+
+        if($request->input('image')){
+            $img= $request->input('image');
+        $image_parts = explode(";base64,", $img);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        //$image_type = $image_type_aux[1];
+  
+        $image_base64 = base64_decode($image_parts[1]);
+       
+        $imgName=$ingreso->id.$ingreso->nodocumento.'.jpeg';
+       $pathimagen='storage/'.$imgName;
+       $path=Storage::disk('local')->put($imgName,$image_base64);
+       $ingreso->fill(['image'=>$pathimagen])->save();
+        }
+        
+
       
         return redirect()->route('ingresos.index')
         ->with('message-success','Se registro correctamente No.'.$ingreso->id);

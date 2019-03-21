@@ -40,9 +40,49 @@
                   </div>
                   <div class="x_content">
 
+                   
                     
-                            {!! Form::open(['route'=>['ingresos.store','method'=>'PUT']]) !!}
+
+                     <!-- Small modal -->
+                  
+
+                  
+                            {!! Form::open(['route'=>['ingresos.store','method'=>'PUT'],'files' =>'True', 'enctype'=>'multipart/form-data']) !!}
                             {!! Form::hidden('user_id', auth()->user()->id) !!}
+
+
+                            <div class="col-md-3">
+                                <div class="docs-preview clearfix">
+                                    
+                                        <div id="my_result" style="width:265px; height:200px;"></div>
+                                        <input type="hidden" name="image" class="image-tag">
+                                   
+                                </div>
+                                <a href="javascript:void(modal_Show())" class="btn btn-primary"><i class="fa fa-camera"></i> Tomar Foto</a>
+                              </div>
+
+
+                            <div class="modal fade bs-example-modal-sm" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                  <div class="modal-content">
+            
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                                      </button>
+                                      <h4 class="modal-title" id="myModalLabel2">Camara</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="my_camera" style="width:265px; height:240px;"></div>
+                                    </div>
+                                    <div class="modal-footer center-block">
+                                      <a href="javascript:void(take_snapshot())" class="btn btn-primary"><i class="fa fa-camera"></i> Capturar</a>
+                                      
+                                    </div>
+            
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- /modals -->
 
                             <h2>Datos</h2>
                             <div class="form-group col-md-2 has-feedback">
@@ -171,9 +211,35 @@
 
       {!!Html::script('vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js')!!}
       {!!Html::script('vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js')!!}
+      {!!Html::script('vendors/webcamjs/webcam.js')!!}
       {!!Html::script('js/angular-datatables.min.js')!!}
        <!-- Datatables -->
+       <script language="JavaScript">
+
+         function modal_Show(){
+          Webcam.set({
+    width: 265,
+    height: 240,
+    
+    image_format: 'jpeg',
+    jpeg_quality: 90,
+    force_flash: false
+});
+         $('#exampleModal').modal('show');
+          Webcam.attach( '#my_camera' );
+         }
+          
+          function take_snapshot() {
+              Webcam.snap( function(data_uri) {
+                $(".image-tag").val(data_uri);
+                  document.getElementById('my_result').innerHTML = '<img src="'+data_uri+'"/>';
+              } );
+
+              $('#exampleModal').modal('hide');
+          }
+      </script>
         <script>
+
           $(document).ready(function() {
               $('#datatable').dataTable();
                $('#datatable-responsive').DataTable();

@@ -36,6 +36,7 @@ class CreateIngresosTable extends Migration
             $table->string('quienesperausa');
             $table->string('quienesperamx');
             $table->string('proximacita');
+            $table->string('image');
             $table->timestamps();
         });
     }

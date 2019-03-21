@@ -27,7 +27,7 @@ class Ingresos extends Model
         'usafamiliares',
         'quienesperausa',
         'quienesperamx',
-        'proximacita'
+        'proximacita','image'
     ];
 
     protected $dataformat='d/m/Y';
