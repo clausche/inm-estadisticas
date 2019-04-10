@@ -96,4 +96,6 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('ingresos/{ingreso}/edit','IngresosController@edit')->name('ingresos.edit')
     ->middleware('permission:ingresos.edit');
+
+    Route::get('downloadExcel/{type}','IngresosController@downloadExcel');
 });

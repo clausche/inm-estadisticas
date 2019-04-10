@@ -89,6 +89,14 @@ if(typeof rfs!="undefined" && rfs){
               <h3>General</h3>
               <ul class="nav side-menu">
                 <li><a href="{!!URL::to('home')!!}"><i class="fa fa-home"></i> Home </a></li>
+                @can('ingresos.index')
+                <li><a><i class="fa fa-list"></i>Ingresos<span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="{{ route('ingresos.index') }}">Registrados</a></li>
+                    <li><a href="{{ url('downloadExcel/xlsx') }}">Exportar Tabla</a></li>
+                  </ul>
+                </li>
+                @endcan
                 @can('repatriados.index')
                 <li><a><i class="fa fa-flash"></i>Repatriados<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">

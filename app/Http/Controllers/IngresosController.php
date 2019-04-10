@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ingresos;
+use App\Exports\IngresosExport;
 use App\Paises;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
+use DB;
+use Excel;
 
 class IngresosController extends Controller
 {
@@ -25,12 +29,14 @@ class IngresosController extends Controller
      */
     public function index()
     {
-        $ingresos=Ingresos::where('fingreso',->get();
+        $date = Carbon::now(); 
+        $date=$date->toDateString();
+        $ingresos=Ingresos::where('fingreso',$date)->get();
         return view('ingresos.index',compact('ingresos'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource.git 
      *
      * @return \Illuminate\Http\Response
      */
@@ -139,5 +145,10 @@ class IngresosController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function downloadExcel($type){
+        
+        return Excel::download(new IngresosExport, 'Ingresos.xlsx');
     }
 }
