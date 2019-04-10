@@ -15,6 +15,6 @@ class IngresosExport implements FromCollection
     */
     public function query()
     {
-        return Ingresos::all();
+        return Ingresos::query();
     }
 }
