@@ -223,7 +223,7 @@
     
     image_format: 'jpeg',
     jpeg_quality: 90,
-    force_flash: false
+    force_flash: true
 });
          $('#exampleModal').modal('show');
           Webcam.attach( '#my_camera' );
